@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
 });
 
 userSchema.methods.comparePassword = async function (password) {
+  if (!this.password) throw new Error("Password not set on user document");
   return await bcrypt.compare(password, this.password);
 };
 
